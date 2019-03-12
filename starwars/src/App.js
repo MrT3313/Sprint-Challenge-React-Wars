@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
 import './App.css';
 
+import ViewSettings from './components/viewSettings'
+import CharList from './components/charList'
+
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      starwarsChars: []
+      starwarsChars: [],
+      viewName: 'default'
     };
   }
 
+
+  // -start- DONT TOUCH THIS -- //
   componentDidMount() {
     this.getCharacters('https://swapi.co/api/people/');
   }
@@ -28,11 +34,21 @@ class App extends Component {
         throw new Error(err);
       });
   };
+  // -- DONT TOUCH THIS -end- //
 
   render() {
     return (
       <div className="App">
-        <h1 className="Header">React Wars</h1>
+        <div className="header container">
+          <h1>React Wars</h1>
+        </div>
+        <div className='content container'>
+          <CharList 
+            characterList={this.state.starwarsChars}
+            viewName={this.state.viewName}
+          />
+        </div>
+
       </div>
     );
   }
